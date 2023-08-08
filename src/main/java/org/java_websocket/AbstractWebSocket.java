@@ -64,6 +64,23 @@ public abstract class AbstractWebSocket extends WebSocketAdapter {
   private boolean reuseAddr;
 
   /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code -1}
+   * </p>
+   * @see java.net.SocketOptions#SO_LINGER
+   * @since 1.5.4.update
+   */
+  private int soLinger = -1;
+
+  private int sndBufSize = 0;
+
+  private int rcvBufSize = 0;
+
+  private int soTimeout = -1;
+
+  /**
    * Attribute for a service that triggers lost connection checking
    *
    * @since 1.4.1
@@ -308,4 +325,118 @@ public abstract class AbstractWebSocket extends WebSocketAdapter {
     this.reuseAddr = reuseAddr;
   }
 
+
+  /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code -1}
+   * </p>
+   *
+   * @return the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter.
+   * @see java.net.SocketOptions#SO_LINGER
+   * @since 1.5.4.update
+   */
+  public int getSoLinger() {
+    return soLinger;
+  }
+
+  /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code -1}
+   * </p>
+   *
+   * @see java.net.SocketOptions#SO_LINGER
+   * @since 1.5.4.update
+   */
+  public void setSoLinger(int soLinger) {
+    this.soLinger = soLinger;
+  }
+
+  /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_SNDBUF} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code 0} (system default)
+   * </p>
+   *
+   * @return the default value of the {@link java.net.SocketOptions#SO_SNDBUF} parameter.
+   * @see java.net.SocketOptions#SO_SNDBUF
+   * @since 1.5.4.update
+   */
+  public int getSndBufSize() {
+    return sndBufSize;
+  }
+
+  /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_RCVBUF} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code 0} (system default)
+   * </p>
+   *
+   * @return the default value of the {@link java.net.SocketOptions#SO_RCVBUF} parameter.
+   * @see java.net.SocketOptions#SO_RCVBUF
+   * @since 1.5.4.update
+   */
+  public int getRcvBufSize() {
+    return rcvBufSize;
+  }
+
+  /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_SNDBUF} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code 0} (system default)
+   * </p>
+   *
+   * @see java.net.SocketOptions#SO_SNDBUF
+   * @since 1.5.4.update
+   */
+  public void setSndBufSize(int sndBufSize) {
+    this.sndBufSize = sndBufSize;
+  }
+
+  /**
+   * Determines the default value of the {@link java.net.SocketOptions#SO_RCVBUF} parameter
+   * for newly created sockets.
+   * <p>
+   * Default: {@code 0} (system default)
+   * </p>
+   *
+   * @see java.net.SocketOptions#SO_RCVBUF
+   * @since 1.5.4.update
+   */
+  public void setRcvBufSize(int rcvBufSize) {
+    this.rcvBufSize = rcvBufSize;
+  }
+
+  /**
+   * Determines the default socket timeout value for non-blocking I/O operations.
+   * <p>
+   * {@code 0} (no timeout)
+   * </p>
+   *
+   * @return the default socket timeout value for non-blocking I/O operations.
+   * @see java.net.SocketOptions#SO_TIMEOUT
+   * @since 1.5.4.update
+   */
+  public int getSoTimeout() {
+    return soTimeout;
+  }
+
+  /**
+   * Determines the default socket timeout value for non-blocking I/O operations.
+   * <p>
+   * {@code 0} (no timeout)
+   * </p>
+   *
+   * @see java.net.SocketOptions#SO_TIMEOUT
+   * @since 1.5.4.update
+   */
+  public void setSoTimeout(int soTimeout) {
+    this.soTimeout = soTimeout;
+  }
 }

@@ -477,6 +477,19 @@ public abstract class WebSocketServer extends AbstractWebSocket implements Runna
     Socket socket = channel.socket();
     socket.setTcpNoDelay(isTcpNoDelay());
     socket.setKeepAlive(true);
+    socket.setReuseAddress(isReuseAddr());//关闭socket时，立即释放socket绑定端口以便端口重用，默认为false
+    if(getSoLinger() >= 0) {
+      socket.setSoLinger(true, getSoLinger());
+    }
+    if(getRcvBufSize() > 0) {
+      socket.setReceiveBufferSize(getRcvBufSize());
+    }
+    if(getSndBufSize() > 0) {
+      socket.setSendBufferSize(getSndBufSize());
+    }
+    if(getSoTimeout() >= 0){
+      socket.setSoTimeout(getSoTimeout());
+    }
     WebSocketImpl w = wsf.createWebSocket(this, drafts);
     w.setSelectionKey(channel.register(selector, SelectionKey.OP_READ, w));
     try {

@@ -467,6 +467,18 @@ public abstract class WebSocketClient extends AbstractWebSocket implements Runna
 
       socket.setTcpNoDelay(isTcpNoDelay());
       socket.setReuseAddress(isReuseAddr());
+//      if(getSoLinger() >= 0) {
+//        socket.setSoLinger(true, getSoLinger());
+//      }
+      if(getRcvBufSize() > 0) {
+        socket.setReceiveBufferSize(getRcvBufSize());
+      }
+      if(getSndBufSize() > 0) {
+        socket.setSendBufferSize(getSndBufSize());
+      }
+      if(getSoTimeout() >= 0){
+        socket.setSoTimeout(getSoTimeout());
+      }
 
       if (!socket.isConnected()) {
         InetSocketAddress addr = dnsResolver == null ? InetSocketAddress.createUnresolved(uri.getHost(), getPort()) : new InetSocketAddress(dnsResolver.resolve(uri), this.getPort());
